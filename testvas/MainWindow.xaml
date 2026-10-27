@@ -1,0 +1,18 @@
+﻿<Window x:Class="testvas.MainWindow"
+        xmlns="http://microsoft.com"
+        xmlns:x="http://microsoft.com"
+        Title="Buggy WPF Window" Height="450" Width="800">
+
+    <Grid>
+        <!-- 5. БАГ (Логика XAML): Элементы накладываются друг на друга. -->
+        <!-- Если не задать Grid.Row или Grid.Column, обе кнопки встанут в ячейку (0,0) -->
+        <!-- Кнопка "Упасть" полностью перекроет кнопку "Зависнуть", юзер её не нажмет. -->
+        <Button Content="Зависнуть" Click="FreezeUiButton_Click" Width="100" Height="30"/>
+        <Button Content="Упасть" Click="CrashButton_Click" Width="100" Height="30"/>
+
+        <!-- 6. БАГ (Ошибка компиляции): Ошибка привязки или отсутствие элемента. -->
+        <!-- Если в коде C# (MainWindow.xaml.cs) нет элемента с именем MyTextBlock, -->
+        <!-- то проект вообще не соберётся, и Гитхаб выдаст ошибку сборки. -->
+        <TextBlock x:Name="MyTextBlock" Text="Стартовый текст" Margin="0,100,0,0" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>
